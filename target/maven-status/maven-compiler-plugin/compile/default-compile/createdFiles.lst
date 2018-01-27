@@ -1,0 +1,4 @@
+com\skyparadisemc\pets\inject\Pet.class
+com\skyparadisemc\pets\inject\PetService.class
+com\skyparadisemc\pets\plugin\PetsPlugin.class
+com\skyparadisemc\pets\PetModule.class
