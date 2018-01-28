@@ -12,7 +12,7 @@ public class PetsPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         long start = System.currentTimeMillis();
-        Guice.createInjector(new PetModule()).injectMembers(this);
+        Guice.createInjector(new PetModule(this)).injectMembers(this);
         System.out.println(System.currentTimeMillis() - start);
     }
 
@@ -21,8 +21,8 @@ public class PetsPlugin extends JavaPlugin {
 
     }
 
-    @Inject
-    private void enable() {
+
+    private @Inject void enable() {
 
     }
 }

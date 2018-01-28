@@ -1,5 +1,7 @@
 package com.skyparadisemc.pets;
 
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.skyparadisemc.pets.abilities.Ability;
 import lombok.Data;
 import org.bukkit.entity.EntityType;
@@ -13,4 +15,10 @@ public class Pet {
     private Ability ability;
 
     private EntityType type;
+
+    public @Inject Pet(@Assisted EntityType type, @Assisted String name, @Assisted Ability ability) {
+        this.type = type;
+        this.name = name;
+        this.ability = ability;
+    }
 }
