@@ -4,13 +4,13 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import lombok.Data;
 import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
-@Data
-public class Ability {
+public interface Ability {
 
-    private String name;
+    default void onInteract(PlayerInteractEvent event) {}
+    default void onDamage(EntityDamageByEntityEvent event) {}
 
-    public @Inject Ability(@Assisted String name) {
-        this.name = name;
-    }
+    public String getName();
 }

@@ -1,18 +1,20 @@
 package com.skyparadisemc.pets.abilities;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.skyparadisemc.pets.Pet;
+import javax.inject.Inject;
+import javax.swing.text.html.Option;
+import java.util.Optional;
+import java.util.Set;
 
 public class AbilityService {
 
-    @Inject
-    private Provider<Ability> abilityProvider;
+    public @Inject Set<Ability> abilities;
 
-    public Ability forPet(Pet pet) {
-
-        //TODO figure this shit
-
-        return null;
+    public Optional<Ability> getAbility(String name) {
+        for (Ability a : abilities) {
+            if (a.getName().equalsIgnoreCase(name)) {
+                return Optional.of(a);
+            }
+        }
+        return Optional.empty();
     }
 }
