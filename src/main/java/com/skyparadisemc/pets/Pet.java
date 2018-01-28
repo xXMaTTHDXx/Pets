@@ -1,10 +1,11 @@
 package com.skyparadisemc.pets;
 
-import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.skyparadisemc.pets.abilities.Ability;
 import lombok.Data;
 import org.bukkit.entity.EntityType;
+
+import javax.inject.Inject;
 
 @Data
 public class Pet {

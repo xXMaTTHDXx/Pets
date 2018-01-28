@@ -24,8 +24,14 @@ public class PetService {
 
     private HashMap<UUID, Pet> playerPets = Maps.newHashMap();
 
-    public void load() {
+    public void renamePet(Player player, String customName) {
+        Pet pet = getPet(player);
 
+        if (pet == null) {
+            return;
+        }
+
+        pet.setCustomName(customName);
     }
 
     public Pet createPet(Player player) {
