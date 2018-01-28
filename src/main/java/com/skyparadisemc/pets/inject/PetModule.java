@@ -16,6 +16,8 @@ import com.skyparadisemc.pets.plugin.PetsPlugin;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Random;
+
 public class PetModule extends AbstractModule {
 
     private JavaPlugin plugin;
@@ -27,6 +29,7 @@ public class PetModule extends AbstractModule {
     protected void configure() {
         bind(DataService.class).to(JsonDataService.class);
         bind(JavaPlugin.class).toInstance(plugin);
+        bind(Random.class).toInstance(new Random());
 
         install(new FactoryModuleBuilder().build(PetFactory.class));
 
