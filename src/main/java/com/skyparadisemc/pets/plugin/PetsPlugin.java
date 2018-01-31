@@ -2,8 +2,11 @@ package com.skyparadisemc.pets.plugin;
 
 import com.google.inject.Guice;
 
+import com.google.inject.Injector;
+import com.skyparadisemc.pets.PetService;
 import com.skyparadisemc.pets.commands.SpigotCommand;
 import com.skyparadisemc.pets.inject.PetModule;
+import lombok.Getter;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,12 +19,16 @@ public class PetsPlugin extends JavaPlugin {
 
     private @Inject Set<Listener> listenerSet;
     private @Inject Set<SpigotCommand> commandsSet;
+    private @Inject PetService petService;
 
     @Override
     public void onEnable() {
         long start = System.currentTimeMillis();
-        Guice.createInjector(new PetModule(this)).injectMembers(this);
+        Injector injector = Guice.createInjector(new PetModule(this));
+
         System.out.println(System.currentTimeMillis() - start);
+
+        enable();
     }
 
     @Override
@@ -30,13 +37,16 @@ public class PetsPlugin extends JavaPlugin {
     }
 
 
-    private @Inject void enable() {
+    private void enable() {
         for (Listener l : listenerSet) {
             getServer().getPluginManager().registerEvents(l, this);
         }
 
         for (SpigotCommand c : commandsSet) {
+
             getCommand(c.getName()).setExecutor(c);
         }
+
+        petService.init();
     }
 }

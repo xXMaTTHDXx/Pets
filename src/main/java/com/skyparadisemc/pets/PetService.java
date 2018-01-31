@@ -10,9 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @Singleton
@@ -27,8 +25,11 @@ public class PetService {
     private @Inject JavaPlugin plugin;
 
     private HashMap<UUID, Pet> playerPets = Maps.newHashMap();
+    private List<EntityType> petTypes = new ArrayList<>();
 
     public void init() {
+        petTypes.add(EntityType.PIG);
+
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, this::updatePets, 0L, 20L);
     }
 
@@ -40,11 +41,7 @@ public class PetService {
 
             Player player = plugin.getServer().getPlayer(entry.getKey());
 
-            if (pet.getLocation() == null) continue;
-
-            if (pet.getLocation().distanceSquared(player.getLocation()) <= 10) continue;
-
-            pet.getEntity().teleport(player.getLocation());
+            pet.follow(player);
         }
     }
 
@@ -58,10 +55,13 @@ public class PetService {
         pet.setCustomName(customName);
     }
 
-    public Pet createPet(Player player) {
-        Pet pet = petFactory.create(player.getName());
+    public Pet createPet(Player player, EntityType type) {
+        Pet pet = petFactory.create(type, player.getName() + "'s Pet", abilityFactory.getAbility("empty").get());
 
         this.playerPets.put(player.getUniqueId(), pet);
+
+        pet.spawn(player.getLocation());
+        pet.follow(player);
 
         return pet;
     }
