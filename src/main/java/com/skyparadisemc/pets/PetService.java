@@ -1,11 +1,14 @@
 package com.skyparadisemc.pets;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.skyparadisemc.pets.abilities.Ability;
 import com.skyparadisemc.pets.abilities.AbilityService;
 import com.skyparadisemc.pets.data.DataService;
 import lombok.Data;
+import lombok.Getter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,13 +27,37 @@ public class PetService {
 
     private @Inject JavaPlugin plugin;
 
+    private @Getter Map<UUID, Map<Ability, Long>> cooldowns = Maps.newHashMap();
+
     private HashMap<UUID, Pet> playerPets = Maps.newHashMap();
-    private List<EntityType> petTypes = new ArrayList<>();
+    private List<EntityType> petTypes = Lists.newArrayList();
 
     public void init() {
         petTypes.add(EntityType.PIG);
 
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, this::updatePets, 0L, 20L);
+    }
+
+    public Map<Ability, Long> getPlayerCooldowns(Player player) {
+        Map<Ability, Long> cooldown = cooldowns.get(player.getUniqueId());
+
+        if (cooldown == null) {
+            return new HashMap<>();
+        }
+
+        return cooldown;
+    }
+
+    public boolean isCoolingDown(Player player, Ability ability) {
+        Map<Ability, Long> pDowns = cooldowns.get(player.getUniqueId());
+
+        Long cooldown = pDowns.get(ability);
+
+        if (cooldown == null) {
+            return false;
+        }
+
+        return System.currentTimeMillis() >= cooldown;
     }
 
     public void updatePets() {

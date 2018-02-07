@@ -13,4 +13,5 @@ public interface Ability {
     default void onDamage(EntityDamageByEntityEvent event) {}
 
     public String getName();
+    public long getCooldown();
 }
