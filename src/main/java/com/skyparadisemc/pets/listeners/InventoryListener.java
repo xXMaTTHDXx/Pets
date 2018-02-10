@@ -43,7 +43,7 @@ public class InventoryListener implements Listener {
 
         String typeName = item.getItemMeta().getDisplayName();
 
-        EntityType type = EntityType.valueOf(typeName.toUpperCase());
+        EntityType type = EntityType.valueOf(ChatColor.stripColor(typeName).toUpperCase());
 
         Pet pet = petService.getPet(player);
 

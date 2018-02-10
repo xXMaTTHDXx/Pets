@@ -74,9 +74,9 @@ public class PetCommand implements SpigotCommand {
 
         for (EntityType type : petService.getPetTypes()) {
 
-            ItemStack item = new ItemStack(Material.EGG, 1);
+            ItemStack item = new ItemStack(Material.PAPER, 1);
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(type.name().toUpperCase());
+            meta.setDisplayName(ChatColor.GREEN + type.name().toUpperCase());
             item.setItemMeta(meta);
             inv.addItem(item);
         }

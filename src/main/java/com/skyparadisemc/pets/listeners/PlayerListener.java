@@ -61,9 +61,10 @@ public class PlayerListener implements Listener {
 
         Ability ability = pet.getAbility();
 
-        if (!(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && player.isSneaking()))
+        if ((event.getAction() != Action.RIGHT_CLICK_AIR || event.getAction() != Action.RIGHT_CLICK_BLOCK) && !player.isSneaking()) {
+            System.out.println("incorrect usage");
             return;
-
+        }
         if (petService.isCoolingDown(player, ability))
             return;
 

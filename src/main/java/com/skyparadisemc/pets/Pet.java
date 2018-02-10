@@ -40,7 +40,6 @@ public class Pet {
         this.type = type;
         this.name = name;
         this.ability = ability;
-        EntityType.
     }
 
     public void update() {

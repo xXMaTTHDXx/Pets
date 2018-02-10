@@ -1,21 +1,19 @@
 package com.skyparadisemc.pets.inject;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Inject;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.multibindings.Multibinder;
 import com.skyparadisemc.pets.PetFactory;
 import com.skyparadisemc.pets.PetService;
 import com.skyparadisemc.pets.abilities.Ability;
-import com.skyparadisemc.pets.abilities.CritAbility;
-import com.skyparadisemc.pets.abilities.EmptyAbility;
+import com.skyparadisemc.pets.abilities.AcrobatAbility;
+import com.skyparadisemc.pets.abilities.AerialAbility;
 import com.skyparadisemc.pets.commands.PetCommand;
 import com.skyparadisemc.pets.commands.SpigotCommand;
 import com.skyparadisemc.pets.data.DataService;
 import com.skyparadisemc.pets.data.JsonDataService;
 import com.skyparadisemc.pets.listeners.InventoryListener;
 import com.skyparadisemc.pets.listeners.PlayerListener;
-import com.skyparadisemc.pets.plugin.PetsPlugin;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,8 +37,8 @@ public class PetModule extends AbstractModule {
         install(new FactoryModuleBuilder().build(PetFactory.class));
 
         Multibinder<Ability> abilityBinder = Multibinder.newSetBinder(binder(), Ability.class);
-        abilityBinder.addBinding().to(EmptyAbility.class);
-        abilityBinder.addBinding().to(CritAbility.class);
+        abilityBinder.addBinding().to(AcrobatAbility.class);
+        abilityBinder.addBinding().to(AerialAbility.class);
 
         Multibinder<Listener> listenerBinder = Multibinder.newSetBinder(binder(), Listener.class);
         listenerBinder.addBinding().to(InventoryListener.class);

@@ -32,8 +32,17 @@ public class PetService {
     private HashMap<UUID, Pet> playerPets = Maps.newHashMap();
     private List<EntityType> petTypes = Lists.newArrayList();
 
+    private Map<EntityType, String> abils = Maps.newHashMap();
+
+    private Ability forPet(EntityType type) {
+        return abilityFactory.getAbility(abils.get(type)).get();
+    }
+
     public void init() {
-        petTypes.add(EntityType.PIG);
+        petTypes.add(EntityType.BAT);
+        petTypes.add(EntityType.CHICKEN);
+
+        abils.put(EntityType.CHICKEN, "aerial");
 
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, this::updatePets, 0L, 20L);
     }
@@ -50,6 +59,10 @@ public class PetService {
 
     public boolean isCoolingDown(Player player, Ability ability) {
         Map<Ability, Long> pDowns = cooldowns.get(player.getUniqueId());
+
+        if (pDowns == null) {
+            return false;
+        }
 
         Long cooldown = pDowns.get(ability);
 
@@ -83,7 +96,7 @@ public class PetService {
     }
 
     public Pet createPet(Player player, EntityType type) {
-        Pet pet = petFactory.create(type, player.getName() + "'s Pet", abilityFactory.getAbility("empty").get());
+        Pet pet = petFactory.create(type, player.getName() + "'s Pet", forPet(type));
 
         this.playerPets.put(player.getUniqueId(), pet);
 
