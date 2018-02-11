@@ -6,7 +6,6 @@ import com.google.inject.multibindings.Multibinder;
 import com.skyparadisemc.pets.PetFactory;
 import com.skyparadisemc.pets.PetService;
 import com.skyparadisemc.pets.abilities.Ability;
-import com.skyparadisemc.pets.abilities.AcrobatAbility;
 import com.skyparadisemc.pets.abilities.AerialAbility;
 import com.skyparadisemc.pets.abilities.TempestAbility;
 import com.skyparadisemc.pets.commands.PetCommand;

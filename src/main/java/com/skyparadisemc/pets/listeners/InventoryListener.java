@@ -21,8 +21,10 @@ import javax.inject.Singleton;
 @Singleton
 public class InventoryListener implements Listener {
 
-    private @Inject JavaPlugin plugin;
-    private @Inject PetService petService;
+    private @Inject
+    JavaPlugin plugin;
+    private @Inject
+    PetService petService;
 
     @EventHandler
     public void onClick(InventoryClickEvent event) {

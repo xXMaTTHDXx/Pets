@@ -13,21 +13,29 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Data
 @Singleton
 public class PetService {
 
-    private @Inject DataService dataService;
+    private @Inject
+    DataService dataService;
 
-    private @Inject AbilityService abilityFactory;
+    private @Inject
+    AbilityService abilityFactory;
 
-    private @Inject PetFactory petFactory;
+    private @Inject
+    PetFactory petFactory;
 
-    private @Inject JavaPlugin plugin;
+    private @Inject
+    JavaPlugin plugin;
 
-    private @Getter Map<UUID, Map<Ability, Long>> cooldowns = Maps.newHashMap();
+    private @Getter
+    Map<UUID, Map<Ability, Long>> cooldowns = Maps.newHashMap();
 
     private HashMap<UUID, Pet> playerPets = Maps.newHashMap();
     private List<EntityType> petTypes = Lists.newArrayList();

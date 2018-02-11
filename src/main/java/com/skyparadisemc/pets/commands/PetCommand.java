@@ -5,7 +5,6 @@ import com.skyparadisemc.pets.PetService;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -20,9 +19,11 @@ import javax.inject.Singleton;
 @Singleton
 public class PetCommand implements SpigotCommand {
 
-    private @Inject JavaPlugin plugin;
+    private @Inject
+    JavaPlugin plugin;
 
-    private @Inject PetService petService;
+    private @Inject
+    PetService petService;
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
