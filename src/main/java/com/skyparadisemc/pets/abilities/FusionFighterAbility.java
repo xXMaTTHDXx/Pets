@@ -13,7 +13,10 @@ import org.bukkit.potion.PotionEffectType;
 
 @Singleton
 public class FusionFighterAbility implements Ability {
-    private static final PotionEffect STUNNED_POTION_EFFECT = new PotionEffect(PotionEffectType.SLOW, 2 * 20, 3);
+    private static final PotionEffect STUNNED_POTION_EFFECT_SLOW = new PotionEffect(PotionEffectType.SLOW, 2 * 20, 2);
+    private static final PotionEffect STUNNED_POTION_EFFECT_CONFUSION = new PotionEffect(PotionEffectType.CONFUSION, 2 * 20, 1);
+    private static final PotionEffect STUNNED_POTION_EFFECT_HARM = new PotionEffect(PotionEffectType.HARM, 20, 0);
+
 
     private @Inject
     PetService petService;
@@ -33,8 +36,10 @@ public class FusionFighterAbility implements Ability {
         if (pet == null)
             return;
 
-        STUNNED_POTION_EFFECT.apply(damaged);
-        damaged.sendMessage(ChatColor.RED + String.format("%s has used their pet's stun ability to stun you.", player.getName()));
+        STUNNED_POTION_EFFECT_SLOW.apply(damaged);
+        STUNNED_POTION_EFFECT_CONFUSION.apply(damaged);
+        STUNNED_POTION_EFFECT_HARM.apply(damaged);
+        damaged.sendMessage(ChatColor.RED + String.format("%s has used their pet's fusion fighter ability against you.", player.getName()));
     }
 
     @Override
