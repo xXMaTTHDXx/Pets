@@ -4,17 +4,15 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.skyparadisemc.pets.Pet;
 import com.skyparadisemc.pets.PetService;
-import org.bukkit.ChatColor;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 @Singleton
-public class StunAbility implements Ability {
-    private static final PotionEffect STUNNED_POTION_EFFECT = new PotionEffect(PotionEffectType.SLOW, 2 * 20, 3);
-
+public class HypersonicLavaAbility implements Ability {
     private @Inject
     PetService petService;
 
@@ -27,19 +25,21 @@ public class StunAbility implements Ability {
             return;
 
         Player player = (Player) event.getDamager();
+
+        //TODO add that custom enchantment stuff, I have no idea how.
         Player damaged = (Player) event.getEntity();
 
         Pet pet = petService.getPet(player);
         if (pet == null)
             return;
 
-        STUNNED_POTION_EFFECT.apply(damaged);
-        damaged.sendMessage(ChatColor.RED + String.format("%s has used their pet's stun ability to stun you.", player.getName()));
+        damaged.setVelocity(new Vector(0, 4, 0));
+        damaged.setFireTicks(2 * 20);
     }
 
     @Override
     public String getName() {
-        return "Stun";
+        return "Hypersonic Lava";
     }
 
     @Override
