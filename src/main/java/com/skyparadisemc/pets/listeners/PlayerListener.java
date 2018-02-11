@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
@@ -34,6 +35,14 @@ public class PlayerListener implements Listener {
         }
 
         pet.getEntity().teleport(event.getTo());
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        if (petService.getPet(event.getPlayer()) != null) {
+            petService.getPet(event.getPlayer()).getEntity().remove();
+            petService.getPlayerPets().remove(event.getPlayer().getUniqueId());
+        }
     }
 
     @EventHandler

@@ -8,6 +8,7 @@ import com.skyparadisemc.pets.PetService;
 import com.skyparadisemc.pets.abilities.Ability;
 import com.skyparadisemc.pets.abilities.AcrobatAbility;
 import com.skyparadisemc.pets.abilities.AerialAbility;
+import com.skyparadisemc.pets.abilities.TempestAbility;
 import com.skyparadisemc.pets.commands.PetCommand;
 import com.skyparadisemc.pets.commands.SpigotCommand;
 import com.skyparadisemc.pets.data.DataService;
@@ -37,8 +38,8 @@ public class PetModule extends AbstractModule {
         install(new FactoryModuleBuilder().build(PetFactory.class));
 
         Multibinder<Ability> abilityBinder = Multibinder.newSetBinder(binder(), Ability.class);
-        abilityBinder.addBinding().to(AcrobatAbility.class);
         abilityBinder.addBinding().to(AerialAbility.class);
+        abilityBinder.addBinding().to(TempestAbility.class);
 
         Multibinder<Listener> listenerBinder = Multibinder.newSetBinder(binder(), Listener.class);
         listenerBinder.addBinding().to(InventoryListener.class);

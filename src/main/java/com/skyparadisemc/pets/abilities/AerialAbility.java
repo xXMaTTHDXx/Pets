@@ -2,6 +2,7 @@ package com.skyparadisemc.pets.abilities;
 
 import com.skyparadisemc.pets.Pet;
 import com.skyparadisemc.pets.PetService;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -9,6 +10,7 @@ import org.bukkit.util.Vector;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.concurrent.TimeUnit;
 
 @Singleton
 public class AerialAbility implements Ability {
@@ -32,7 +34,8 @@ public class AerialAbility implements Ability {
 
             Player p = (Player) e;
 
-            p.getVelocity().add(new Vector(p.getVelocity().getX(), 10, p.getVelocity().getZ()).multiply(-1));
+            p.setVelocity(p.getLocation().getDirection().multiply(-1).add(new Vector(0, 10, 0)));
+            p.sendMessage(ChatColor.RED + "You have been hit with " + player.getName() + "'s " + getName() + " ability!");
         }
 
     }
@@ -44,6 +47,6 @@ public class AerialAbility implements Ability {
 
     @Override
     public long getCooldown() {
-        return 0;
+        return TimeUnit.MINUTES.toMillis(5);
     }
 }

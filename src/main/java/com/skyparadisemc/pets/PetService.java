@@ -39,10 +39,12 @@ public class PetService {
     }
 
     public void init() {
-        petTypes.add(EntityType.BAT);
+        //petTypes.add(EntityType.BAT); Disabled cause bat's don't have a pathfindergoal
         petTypes.add(EntityType.CHICKEN);
+        petTypes.add(EntityType.SNOWMAN);
 
         abils.put(EntityType.CHICKEN, "aerial");
+        abils.put(EntityType.SNOWMAN, "tempest");
 
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, this::updatePets, 0L, 20L);
     }
