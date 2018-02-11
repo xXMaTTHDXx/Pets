@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 @Singleton
-public class StunAbility implements Ability {
+public class FusionFighterAbility implements Ability {
     private static final PotionEffect STUNNED_POTION_EFFECT = new PotionEffect(PotionEffectType.SLOW, 2 * 20, 3);
 
     private @Inject
