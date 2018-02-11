@@ -17,12 +17,12 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Map;
-import java.util.UUID;
 
 @Singleton
 public class PlayerListener implements Listener {
 
-    private @Inject PetService petService;
+    private @Inject
+    PetService petService;
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent event) {

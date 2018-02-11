@@ -3,27 +3,21 @@ package com.skyparadisemc.pets.abilities;
 import com.skyparadisemc.pets.Pet;
 import com.skyparadisemc.pets.PetService;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
 public class AcrobatAbility implements Ability {
 
-    private @Inject PetService petService;
+    private @Inject
+    PetService petService;
 
     @Override
     public void onInteract(PlayerInteractEvent event) {
@@ -43,8 +37,8 @@ public class AcrobatAbility implements Ability {
 
             Player p = (Player) e;
 
-            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*10, 1));
-            p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20*5, 1));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 10, 1));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * 5, 1));
             p.sendMessage(player.getName() + "'s " + pet.getCustomName() + " has used the: " + getName() + " special!");
             break;
         }

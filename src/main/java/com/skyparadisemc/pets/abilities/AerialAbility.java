@@ -15,7 +15,8 @@ import java.util.concurrent.TimeUnit;
 @Singleton
 public class AerialAbility implements Ability {
 
-    private @Inject PetService petService;
+    private @Inject
+    PetService petService;
 
     @Override
     public void onInteract(PlayerInteractEvent event) {
@@ -24,7 +25,7 @@ public class AerialAbility implements Ability {
 
         Pet pet = petService.getPet(player);
 
-        for (Entity e : pet.getEntity().getNearbyEntities(5,5,5)) {
+        for (Entity e : pet.getEntity().getNearbyEntities(5, 5, 5)) {
 
             if (!(e instanceof Player))
                 continue;

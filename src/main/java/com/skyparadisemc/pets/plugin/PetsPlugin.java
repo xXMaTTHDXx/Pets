@@ -1,12 +1,10 @@
 package com.skyparadisemc.pets.plugin;
 
 import com.google.inject.Guice;
-
 import com.google.inject.Injector;
 import com.skyparadisemc.pets.PetService;
 import com.skyparadisemc.pets.commands.SpigotCommand;
 import com.skyparadisemc.pets.inject.PetModule;
-import lombok.Getter;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,9 +15,12 @@ import java.util.Set;
 @Singleton
 public class PetsPlugin extends JavaPlugin {
 
-    private @Inject Set<Listener> listenerSet;
-    private @Inject Set<SpigotCommand> commandsSet;
-    private @Inject PetService petService;
+    private @Inject
+    Set<Listener> listenerSet;
+    private @Inject
+    Set<SpigotCommand> commandsSet;
+    private @Inject
+    PetService petService;
 
     @Override
     public void onEnable() {

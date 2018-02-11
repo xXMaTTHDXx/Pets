@@ -8,7 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class JsonDataService implements DataService {
 
 
-    private @Inject JavaPlugin plugin;
+    private @Inject
+    JavaPlugin plugin;
 
     public void save() {
 
